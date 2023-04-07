@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -9,27 +9,60 @@ export class UiService {
   loadingStateChanged = new Subject<boolean>();
   serverMessage = 'Internal Serve Error, Status Code 500';
 
-  constructor(private snackbar: MatSnackBar)
-  {}
-
-  showSnackBar(
-    message: string = 'The request failed, Retry again',
-    action = 'OK!',
-    duration = 4000
-  ): void {
-    this.snackbar.open(message, action, {
-      duration,
-      horizontalPosition: 'center',
-      politeness: 'polite',
-      verticalPosition: 'bottom',
-    });
+  constructor(private snackbar: MatSnackBar) {}
+  default(message: string, isHandset?: boolean) {
+    this.showSnackBar(
+      message,
+      { panelClass: 'default-notification-overlay' },
+      isHandset
+    );
   }
-  errorFormatter(error: any): void {
+  showInfo(message: string, isHandset?: boolean): void {
+    this.showSnackBar(
+      message,
+      { panelClass: 'info-notification-overlay' },
+      isHandset
+    );
+  }
+  showSuccess(message: string, isHandset?: boolean): void {
+    this.showSnackBar(
+      message,
+      { panelClass: 'success-notification-overlay' },
+      isHandset
+    );
+  }
+  showWarn(message: string, isHandset?: boolean): void {
+    this.showSnackBar(
+      message,
+      { panelClass: 'warning-notification-overlay' },
+      isHandset
+    );
+  }
+  showError(error: any, isHandset?: boolean): void {
     const message = error.error.message
       ? error.error.message
       : this.serverMessage;
-    this.showSnackBar(message);
     this.loadingStateChanged.next(false);
     console.error(message);
+    this.showSnackBar(
+      message,
+      { panelClass: 'error-notification-overlay' },
+      isHandset
+    );
+  }
+  private showSnackBar(
+    message: string = 'The request failed, Retry again',
+    configuration: MatSnackBarConfig,
+    isHandset?: boolean
+  ): void {
+    if (!isHandset) {
+      {
+        (configuration.verticalPosition = 'top'),
+          (configuration.horizontalPosition = 'center');
+      }
+    }
+    configuration.duration = 4000;
+    const action = 'OK!';
+    this.snackbar.open(message, action, configuration);
   }
 }

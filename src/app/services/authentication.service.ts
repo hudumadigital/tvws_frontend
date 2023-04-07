@@ -13,28 +13,27 @@ export interface Auth{
 
 export class AuthenticationService {
   url = 'http://localhost:4000/account';
-  serverMessage = 'Internal Server Error, Status Code 500';
   userSubject = new BehaviorSubject<any>(null);
   constructor(private http: HttpClient, private router: Router, private uiService: UiService) { }
 
-//   login(authInfo: Auth): void{
-//     this.uiService.loadingStateChanged.next(true)
-//     this.http.post<Auth>(this.url + '/login', {
-//       email: authInfo.email,
-//       password: authInfo.password
-//     })
-//     .subscribe((result: any) => {
-//       this.uiService.loadingStateChanged.next(false)
-//       if (!result.isLoggedIn) {
-//         this.uiService.showSnackBar(result.message)
-//         return;
-//       }
-//       const user = {
-//         token: result.token,
-//         username: result.username
-//       };
-//       localStorage.setItem('userData', JSON.stringify(user));
-//       return this.router.navigate(['../user']);
-//     })
-// }
+  login(authInfo: Auth): void{
+    this.uiService.loadingStateChanged.next(true)
+    this.http.post<Auth>(this.url + '/login', {
+      email: authInfo.email,
+      password: authInfo.password
+    })
+    .subscribe((result: any) => {
+      this.uiService.loadingStateChanged.next(false)
+      if (!result.isLoggedIn) {
+        this.uiService.showInfo(result.message)
+        return;
+      }
+      const user = {
+        token: result.token,
+        username: result.username
+      };
+      localStorage.setItem('userData', JSON.stringify(user));
+      return this.router.navigate(['../user']);
+    })
+}
 }

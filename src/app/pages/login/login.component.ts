@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { UiService } from 'src/app/services/ui.service';
@@ -17,6 +17,8 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./login.component.scss'],
 })
 export default class LoginComponent implements OnInit, OnDestroy {
+  // private uiService = inject(UiService);
+  // private authService = inject(AuthenticationService)
   constructor() {}
   ngOnInit(): void {}
   ngOnDestroy(): void {}
