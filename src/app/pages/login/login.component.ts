@@ -1,16 +1,17 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { UiService } from 'src/app/services/ui.service';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import {
-  FormsModule,
-  FormBuilder,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UiService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-login',
@@ -21,16 +22,18 @@ import {
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
+    MatInputModule,
     MatIconModule,
   ],
   template: `
     <section>
       <div>
         <h3>Login to your account</h3>
-        <form [formGroup]="loginForm" , (ngSubmit)="login()">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
           <mat-form-field>
             <mat-label> Username [Email] </mat-label>
             <input
+              matInput
               type="email"
               formControlName="email"
               name="email"
@@ -48,8 +51,8 @@ import {
           </mat-form-field>
           <mat-form-field>
             <input
+              matInput
               [type]="isPasswordVisible ? 'text' : 'password'"
-              ,
               formControlName="password"
               name="password"
               placeholder="*******"
