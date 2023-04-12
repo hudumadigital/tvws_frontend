@@ -8,6 +8,12 @@ module.exports = {
         padding: "1rem",
       },
     },
+    screens: {
+      sm: "480px",
+      md: "768px",
+      lg: "986px",
+      xl: "1440px",
+    },
   },
   plugins: [],
 };

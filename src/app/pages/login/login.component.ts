@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UiService } from 'src/app/services/ui.service';
 
@@ -24,14 +25,30 @@ import { UiService } from 'src/app/services/ui.service';
     ReactiveFormsModule,
     MatInputModule,
     MatIconModule,
+    MatProgressSpinnerModule,
   ],
   template: `
-    <section>
-      <div>
-        <h3>Login to your account</h3>
-        <form [formGroup]="loginForm" (ngSubmit)="login()">
-          <mat-form-field>
-            <mat-label> Username [Email] </mat-label>
+    <section class="flex flex-col md:flex-row h-screen">
+      <!-- Login side -->
+      <div class="flex flex-col w-full md:w-1/3">
+        <h3 class="text-3xl text-center font-bold mt-10">
+          Login to your account
+        </h3>
+        <p class="max-w-sm text-center text-gray-400 m-6">
+          Not registered?
+          <a
+            href=""
+            class="p-2 px-4 pt-2 text-white bg-black rounded-full baseline hover:bg-blend-darken"
+            >Sign up</a
+          >
+        </p>
+        <form
+          [formGroup]="loginForm"
+          (ngSubmit)="login()"
+          class="flex flex-col m-12"
+        >
+          <mat-form-field class="">
+            <mat-label> Email </mat-label>
             <input
               matInput
               type="email"
@@ -39,7 +56,7 @@ import { UiService } from 'src/app/services/ui.service';
               name="email"
               placeholder="Eg. example@example.com"
             />
-            <mat-error>
+            <mat-error class="text-red-400">
               {{
                 loginForm.controls['email'].hasError('required')
                   ? 'Email is required'
@@ -50,6 +67,7 @@ import { UiService } from 'src/app/services/ui.service';
             </mat-error>
           </mat-form-field>
           <mat-form-field>
+            <mat-label>Password</mat-label>
             <input
               matInput
               [type]="isPasswordVisible ? 'text' : 'password'"
@@ -68,7 +86,7 @@ import { UiService } from 'src/app/services/ui.service';
                 {{ isPasswordVisible ? 'visibility' : 'visibility_off' }}
               </mat-icon>
             </button>
-            <mat-error>
+            <mat-error class="text-red-400">
               {{
                 loginForm.controls['password'].hasError('required')
                   ? 'Password is required'
@@ -76,7 +94,27 @@ import { UiService } from 'src/app/services/ui.service';
               }}
             </mat-error>
           </mat-form-field>
+          <button
+            type="submit"
+            class="mt-8 bg-black text-white font-bold py-2 px-4 rounded-full"
+            [disabled]="loadingState"
+          >
+            <mat-spinner
+              *ngIf="loadingState"
+              [diameter]="15"
+              [strokeWidth]="2"
+            ></mat-spinner>
+            <!-- <mat-icon *ngIf="!loadingState">Login</mat-icon> -->
+            {{ loadingState ? 'Loading...' : 'Login' }}
+          </button>
+          <!-- <button mat-raised-button>Not registered?</button> -->
         </form>
+      </div>
+      <!-- The Other Side -->
+      <div class="hidden w-2/3  bg-black items-center md:block">
+        <h1 class="text-center text-white text-5xl font-bold mt-40">
+          TVWS security management system for streets
+        </h1>
       </div>
     </section>
   `,
