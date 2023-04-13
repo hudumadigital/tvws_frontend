@@ -1,16 +1,22 @@
+import {
+  BreakpointObserver,
+  Breakpoints,
+  LayoutModule,
+} from '@angular/cdk/layout';
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints, LayoutModule } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
   imports: [
+    CommonModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
