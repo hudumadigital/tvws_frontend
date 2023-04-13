@@ -1,8 +1,9 @@
+import { provideHttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { provideHttpClient } from '@angular/common/http';
 
-import { AppComponent } from './app.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   PreloadAllModules,
@@ -11,9 +12,9 @@ import {
   withInMemoryScrolling,
   withPreloading,
 } from '@angular/router';
+import { ToastrModule } from 'ngx-toastr';
+import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routes';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     RouterOutlet,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    MatIconModule
+    MatIconModule,
+    ToastrModule.forRoot({
+      closeButton: true,
+      progressBar: true,
+    }),
   ],
   providers: [
     provideRouter(

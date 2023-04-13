@@ -7,12 +7,15 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatRippleModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Subject, takeUntil } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { UiService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +29,7 @@ import { UiService } from 'src/app/services/ui.service';
     MatInputModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    MatRippleModule,
   ],
   template: `
     <section class="flex flex-col md:flex-row h-screen">
@@ -37,10 +41,10 @@ import { UiService } from 'src/app/services/ui.service';
         <p class="max-w-sm text-center text-gray-400 m-6">
           Not registered?
           <a
-            href=""
-            class="p-2 px-4 pt-2 text-white bg-black rounded-full baseline hover:bg-blend-darken"
-            >Sign up</a
+            class="p-2 px-4 pt-2 text-white bg-black rounded-full baseline hover:bg-blend-darken hover:cursor-pointer"
           >
+            Sign up
+          </a>
         </p>
         <form
           [formGroup]="loginForm"
@@ -66,6 +70,7 @@ import { UiService } from 'src/app/services/ui.service';
               }}
             </mat-error>
           </mat-form-field>
+
           <mat-form-field>
             <mat-label>Password</mat-label>
             <input
@@ -96,23 +101,28 @@ import { UiService } from 'src/app/services/ui.service';
           </mat-form-field>
           <button
             type="submit"
-            class="mt-8 bg-black text-white font-bold py-2 px-4 rounded-full"
+            class="mt-8 bg-black text-white font-bold py-2 px-4 rounded-full flex items-center justify-center gap-3"
             [disabled]="loadingState"
+            matRipple
           >
             <mat-spinner
               *ngIf="loadingState"
               [diameter]="15"
               [strokeWidth]="2"
             ></mat-spinner>
-            <!-- <mat-icon *ngIf="!loadingState">Login</mat-icon> -->
+            <mat-icon *ngIf="!loadingState" inline class="text-lg"
+              >login</mat-icon
+            >
             {{ loadingState ? 'Loading...' : 'Login' }}
           </button>
           <!-- <button mat-raised-button>Not registered?</button> -->
         </form>
       </div>
       <!-- The Other Side -->
-      <div class="hidden w-2/3  bg-black items-center md:block">
-        <h1 class="text-center text-white text-5xl font-bold mt-40">
+      <div class="hidden md:block md:w-2/3  bg-black items-center">
+        <h1
+          class="text-center text-white text-5xl font-bold mt-40 leading-normal"
+        >
           TVWS security management system for streets
         </h1>
       </div>
@@ -121,9 +131,12 @@ import { UiService } from 'src/app/services/ui.service';
   styleUrls: ['./login.component.scss'],
 })
 export default class LoginComponent implements OnInit, OnDestroy {
-  private uiService = inject(UiService);
   private authService = inject(AuthenticationService);
   private fb = inject(FormBuilder);
+  private toastr = inject(ToastrService);
+  private router = inject(Router);
+  private destroy$ = new Subject<boolean>();
+
   isPasswordVisible: boolean = false;
   loadingState: boolean = false;
   loginForm = this.fb.group({
@@ -131,16 +144,36 @@ export default class LoginComponent implements OnInit, OnDestroy {
     password: ['', [Validators.required]],
   });
 
-  constructor() {}
   ngOnInit(): void {}
+
   login() {
     if (this.loginForm.invalid) {
       return;
     }
-    this.authService.login({
-      email: this.loginForm.getRawValue().email,
-      password: this.loginForm.getRawValue().password,
-    });
+
+    this.loadingState = true;
+    this.authService
+      .login({
+        email: this.loginForm.getRawValue().email!, // we are sure that email is not null due to the form validation above that's why we are using the non-null assertion operator (!)
+        password: this.loginForm.getRawValue().password!,
+      })
+      .pipe(takeUntil(this.destroy$)) // this is to prevent memory leaks(removing the subscription when the component is destroyed) check the ngOnDestroy method below
+      .subscribe({
+        next: (res) => {
+          this.loadingState = false;
+          // do any component specific stuff here
+            this.router.navigateByUrl('/dashboard');
+        },
+        error: (err) => {
+          this.loadingState = false;
+          this.toastr.error(err.error.message, 'Error');
+          // do any component specific stuff here for error
+        },
+      });
   }
-  ngOnDestroy(): void {}
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
 }

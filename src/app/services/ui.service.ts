@@ -6,10 +6,12 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class UiService {
-  loadingStateChanged = new Subject<boolean>();
+  loadingStateChanged = new Subject<boolean>(); // we are making loading effect inside component
   serverMessage = 'Internal Serve Error, Status Code 500';
 
   constructor(private snackbar: MatSnackBar) {}
+
+  // We are not using snackbar for the notification anymore check toastr service instead
   default(message: string, isHandset?: boolean) {
     this.showSnackBar(
       message,

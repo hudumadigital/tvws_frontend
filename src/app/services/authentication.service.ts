@@ -1,43 +1,51 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Route, Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
-import { UiService } from './ui.service';
+import { Injectable, inject } from '@angular/core';
+import { BehaviorSubject, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
 export interface Auth {
-  email: any;
-  password: any;
+  email: string;
+  password: string;
 }
+
+export interface AuthResponse {
+  success: boolean;
+  token: string;
+  email: string;
+  userID: string;
+  isLoggedIn: boolean;
+  expiresIn: number;
+  username: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
-  url = 'http://localhost:4000/account';
-  userSubject = new BehaviorSubject<any>(null);
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private uiService: UiService
-  ) {}
+  private http = inject(HttpClient);
 
-  login(authInfo: Auth): void {
-    this.uiService.loadingStateChanged.next(true);
-    this.http
-      .post<Auth>(this.url + '/login', {
+  url = `${environment.backendUrl}/account`;
+  userSubject = new BehaviorSubject<any>(null);
+  userStorageKey = 'user';
+
+  login(authInfo: Auth) {
+    return this.http
+      .post<AuthResponse>(this.url + '/login', {
         email: authInfo.email,
         password: authInfo.password,
       })
-      .subscribe((result: any) => {
-        this.uiService.loadingStateChanged.next(false);
-        if (!result.isLoggedIn) {
-          this.uiService.showInfo(result.message);
-          return;
-        }
-        const user = {
-          token: result.token,
-          username: result.username,
-        };
-        localStorage.setItem('userData', JSON.stringify(user));
-        return this.router.navigate(['../user']);
-      });
+      .pipe(
+        // tap is used to perform side effects without changing the value
+        tap((result) => {
+          if (result.isLoggedIn) {
+            const user = {
+              token: result.token,
+              username: result.username,
+            };
+            this.userSubject.next(user);
+            localStorage.setItem(this.userStorageKey, JSON.stringify(user));
+          }
+        })
+      );
   }
 }
