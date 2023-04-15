@@ -162,7 +162,7 @@ export default class LoginComponent implements OnInit, OnDestroy {
         next: (res) => {
           this.loadingState = false;
           // do any component specific stuff here
-            this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/dashboard');
         },
         error: (err) => {
           this.loadingState = false;
