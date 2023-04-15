@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { RouterLinkActive, RouterLinkWithHref, RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
@@ -23,7 +24,10 @@ import { map, shareReplay } from 'rxjs/operators';
     MatButtonModule,
     MatSidenavModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    RouterOutlet,
+    RouterLinkWithHref,
+    RouterLinkActive
   ],
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
