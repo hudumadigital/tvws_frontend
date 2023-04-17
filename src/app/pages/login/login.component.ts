@@ -101,7 +101,9 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
           </mat-form-field>
           <button
             type="submit"
-            class="mt-8 bg-black text-white font-bold py-2 px-4 rounded-full flex items-center justify-center gap-3"
+            class="mt-8 py-2 px-4 rounded-full"
+            color="primary"
+            mat-raised-button
             [disabled]="loadingState"
             matRipple
           >
@@ -110,9 +112,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
               [diameter]="15"
               [strokeWidth]="2"
             ></mat-spinner>
-            <mat-icon *ngIf="!loadingState" inline class="text-lg"
-              >login</mat-icon
-            >
+            <mat-icon *ngIf="!loadingState">login</mat-icon>
             {{ loadingState ? 'Loading...' : 'Login' }}
           </button>
           <!-- <button mat-raised-button>Not registered?</button> -->

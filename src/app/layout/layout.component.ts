@@ -15,10 +15,10 @@ import {
   RouterLinkWithHref,
   RouterOutlet,
 } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable, Subject } from 'rxjs';
 import { map, shareReplay, takeUntil } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-layout',
@@ -54,8 +54,9 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {
     let user: any = localStorage.getItem('user');
     user = JSON.parse(user);
-    if(user){
-      this.username = user.username ? "Hi, " + user.username : "Log in";
+    if (user) {
+      console.log(user);
+      this.username = user.username ? 'Hi, ' + user.username : 'Log in';
     }
     this.authComponent.userSubject.pipe(takeUntil(this.destroy$)).subscribe({
       next: (res) => {
