@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backendUrl: 'https://tvws.herokuapp.com/',
+  backendUrl: 'https://tvws.herokuapp.com',
 };

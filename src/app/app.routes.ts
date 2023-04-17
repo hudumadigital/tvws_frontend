@@ -37,8 +37,8 @@ export const AppRoutes: Routes = [
       },
       {
         path: 'incidents',
-        component: IncidentsComponent
-      }
+        component: IncidentsComponent,
+      },
     ],
   },
 ];

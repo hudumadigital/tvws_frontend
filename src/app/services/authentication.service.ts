@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -23,6 +24,7 @@ export interface AuthResponse {
 })
 export class AuthenticationService {
   private http = inject(HttpClient);
+  private router = inject(Router);
 
   url = `${environment.backendUrl}/account`;
   userSubject = new BehaviorSubject<any>(null);
@@ -36,19 +38,28 @@ export class AuthenticationService {
       })
       .pipe(
         // tap is used to perform side effects without changing the value
-        tap((result) => {
-          if (result.isLoggedIn) {
-            const user = {
-              token: result.token,
-              username: result.username,
-              email: result.email,
-            };
-            this.userSubject.next(user);
-            localStorage.setItem(this.userStorageKey, JSON.stringify(user));
+        tap(
+          (result) => {
+            console.log(result)
+            if (result.isLoggedIn) {
+              const user = {
+                token: result.token,
+                username: result.username,
+                email: result.email,
+              };
+              this.userSubject.next(user);
+              localStorage.setItem(this.userStorageKey, JSON.stringify(user));
+            }
+          },
+          (error) => {
+            console.log(error);
+            throw error;
           }
-        }, error => {
-          throw error
-        })
+        )
       );
+  }
+  logout() {
+    if (localStorage.getItem('user')) localStorage.removeItem('user');
+    this.router.navigateByUrl('/');
   }
 }

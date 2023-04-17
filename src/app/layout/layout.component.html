@@ -47,11 +47,19 @@
           Reports
         </span>
       </a>
+      <a routerLink="/" mat-list-item routerLinkActive="bg-red-200" (click)="logout()">
+        <mat-icon class="mr-2 text-gray-800">
+          login
+        </mat-icon>
+        <span matListItemLine class="">
+          Logout
+        </span>
+      </a>
     </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar color="primary" class="flex items-center">
+    <mat-toolbar color="primary">
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -61,13 +69,14 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <div>
-        <div class="pt-2">
+      <!-- style="border: solid; border-color: brown" -->
+      <div class="flex justify-end w-full text-2xl font-bold md:text-3x">
+        <div class="pt-2 text-white">
           {{ this.username }}
         </div>
       </div>
     </mat-toolbar>
-    <section class="container">
+    <section class="container mt-6">
       <router-outlet></router-outlet>
     </section>
   </mat-sidenav-content>

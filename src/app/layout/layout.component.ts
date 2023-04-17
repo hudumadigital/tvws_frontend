@@ -46,7 +46,7 @@ export class LayoutComponent implements OnInit {
       shareReplay()
     );
   private toastr = inject(ToastrService);
-  private authComponent = inject(AuthenticationService);
+  private authService = inject(AuthenticationService);
   private destroy$ = new Subject<boolean>();
   username = '';
 
@@ -58,7 +58,7 @@ export class LayoutComponent implements OnInit {
       console.log(user);
       this.username = user.username ? 'Hi, ' + user.username : 'Log in';
     }
-    this.authComponent.userSubject.pipe(takeUntil(this.destroy$)).subscribe({
+    this.authService.userSubject.pipe(takeUntil(this.destroy$)).subscribe({
       next: (res) => {
         // this.username = res.username ? res.username : "Log in";
         // console.log(res);
@@ -68,4 +68,7 @@ export class LayoutComponent implements OnInit {
       },
     });
   }
+  logout() {
+    this.authService.logout();
+    }
 }
