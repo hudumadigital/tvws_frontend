@@ -4,15 +4,21 @@ import {
   LayoutModule,
 } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterLinkActive, RouterLinkWithHref, RouterOutlet } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import {
+  RouterLinkActive,
+  RouterLinkWithHref,
+  RouterOutlet,
+} from '@angular/router';
+import { Observable, Subject } from 'rxjs';
+import { map, shareReplay, takeUntil } from 'rxjs/operators';
+import { AuthenticationService } from '../services/authentication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-layout',
@@ -27,18 +33,38 @@ import { map, shareReplay } from 'rxjs/operators';
     MatIconModule,
     RouterOutlet,
     RouterLinkWithHref,
-    RouterLinkActive
+    RouterLinkActive,
   ],
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
       map((result) => result.matches),
       shareReplay()
     );
+  private toastr = inject(ToastrService);
+  private authComponent = inject(AuthenticationService);
+  private destroy$ = new Subject<boolean>();
+  username = '';
 
   constructor(private breakpointObserver: BreakpointObserver) {}
+  ngOnInit(): void {
+    let user: any = localStorage.getItem('user');
+    user = JSON.parse(user);
+    if(user){
+      this.username = user.username ? "Hi, " + user.username : "Log in";
+    }
+    this.authComponent.userSubject.pipe(takeUntil(this.destroy$)).subscribe({
+      next: (res) => {
+        // this.username = res.username ? res.username : "Log in";
+        // console.log(res);
+      },
+      error: (err) => {
+        this.toastr.error(err.error.message, 'Error');
+      },
+    });
+  }
 }

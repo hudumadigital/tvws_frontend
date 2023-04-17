@@ -41,10 +41,13 @@ export class AuthenticationService {
             const user = {
               token: result.token,
               username: result.username,
+              email: result.email,
             };
             this.userSubject.next(user);
             localStorage.setItem(this.userStorageKey, JSON.stringify(user));
           }
+        }, error => {
+          throw error
         })
       );
   }

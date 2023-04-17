@@ -17,12 +17,34 @@
           Dashboard
         </span>
       </a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item href="/livewatch">
+        <mat-icon matListItemIcon class="mr-3 text-gray-800"> </mat-icon>
+        <span matListItemLine class="font-medium text-base text-gray-800">
+          liveWatch
+        </span>
+      </a>
+      <a mat-list-item href="/alarms">
+        <mat-icon matListItemIcon class="mr-3 text-gray-800"> </mat-icon>
+        <span matListItemLine class="font-medium text-base text-gray-800">
+          Alarms
+        </span>
+      </a>
+      <a mat-list-item href="/incidents"
+        ><mat-icon matListItemIcon class="mr-3 text-gray-800"> </mat-icon>
+        <span matListItemLine class="font-medium text-base text-gray-800">
+          Create incident
+        </span></a
+      >
+      <a mat-list-item href="/reports"
+        ><mat-icon matListItemIcon class="mr-3 text-gray-800"> </mat-icon>
+        <span matListItemLine class="font-medium text-base text-gray-800">
+          Reports
+        </span>
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+    <mat-toolbar>
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -32,8 +54,14 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>tvws</span>
+      <div class="flex items-end">
+        <div class="pt-2">
+          {{ this.username }}
+        </div>
+      </div>
     </mat-toolbar>
-    <router-outlet></router-outlet>
+    <section class="container">
+      <router-outlet></router-outlet>
+    </section>
   </mat-sidenav-content>
 </mat-sidenav-container>
