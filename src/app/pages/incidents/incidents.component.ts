@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   template: `
     <p>
-      incidents works!
+      Create Suspicion works!
     </p>
   `,
   styleUrls: ['./incidents.component.scss']
