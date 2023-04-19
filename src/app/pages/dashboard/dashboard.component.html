@@ -1,31 +1,27 @@
-<div class="grid-container">
+<div class="m-0">
   <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile
-      *ngFor="let card of cards | async"
-      [colspan]="card.cols"
-      [rowspan]="card.rows"
-    >
-      <mat-card class="dashboard-card">
+  <mat-grid-list cols="4" rowHeight="150px">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card
+        class="absolute top-4 left-4 right-4 bottom-4 flex flex-col justify-center items-center gap-2 text-center pb-0"
+      >
         <mat-card-header>
-          <mat-card-title>
-            {{ card.title }}
-            <button
-              mat-icon-button
-              class="more-button"
-              [matMenuTriggerFor]="menu"
-              aria-label="Toggle menu"
-            >
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
-          </mat-card-title>
+          <mat-card-title>New Suspicious Events</mat-card-title>
         </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>Card Content Here</div>
+        <mat-card-content class="">
+          <h3 class="mb-0 font-semibold text-4xl">28</h3>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card
+        class="absolute top-4 left-4 right-4 bottom-4 flex flex-col justify-center items-center gap-2 text-center pb-0"
+      >
+        <mat-card-header>
+          <mat-card-title>Resolved Crimes</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="">
+          <h3 class="mb-0 font-semibold text-4xl">17</h3>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
