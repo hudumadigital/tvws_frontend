@@ -47,13 +47,15 @@
           Reports
         </span>
       </a>
-      <a routerLink="/" mat-list-item routerLinkActive="bg-red-200" (click)="logout()">
-        <mat-icon class="mr-1 text-gray-800">
-          login
-        </mat-icon>
-        <span matListItemLine class="">
-          Logout
-        </span>
+      <a
+        routerLink="/"
+        mat-list-item
+        routerLinkActive="bg-red-200"
+        (click)="logout()"
+        class="mt-6"
+      >
+        <mat-icon matListItemIcon class="mr-1 text-gray-800"> login </mat-icon>
+        <span matListItemLine class=""> Logout </span>
       </a>
     </mat-nav-list>
   </mat-sidenav>
