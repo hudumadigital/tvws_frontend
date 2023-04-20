@@ -5,13 +5,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-incidents',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <p>
-      Create Suspicion works!
-    </p>
-  `,
-  styleUrls: ['./incidents.component.scss']
+  template: ` <p>Create Suspicion Manual Event works!</p> `,
+  styleUrls: ['./incidents.component.scss'],
 })
-export class IncidentsComponent {
-
-}
+export class IncidentsComponent {}

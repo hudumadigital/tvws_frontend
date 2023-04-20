@@ -5,13 +5,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-alarms',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <p>
-      alarms works!
-    </p>
-  `,
-  styleUrls: ['./alarms.component.scss']
+  template: ` <p>Event Notification works!</p> `,
+  styleUrls: ['./alarms.component.scss'],
 })
-export class AlarmsComponent {
-
-}
+export class AlarmsComponent {}

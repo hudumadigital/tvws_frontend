@@ -35,16 +35,17 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
     <section class="flex flex-col md:flex-row h-screen">
       <!-- Login side -->
       <div class="flex flex-col w-full md:w-1/3">
-        <h3 class="text-3xl text-center font-bold mt-10">
+        <h3 class="text-3xl text-center font-bold mt-12">
           Login to your account
         </h3>
-        <p class="max-w-sm text-center text-gray-400 m-6">
-          Not registered?
-          <a
+        <p class="max-w-sm text-gray-400 ml-12 mt-6">
+          Not registered? <br />
+          Please contact your System Admin
+          <!-- <a
             class="p-2 px-4 pt-2 text-white bg-black rounded-full baseline hover:bg-blend-darken hover:cursor-pointer"
           >
             Sign up
-          </a>
+          </a> -->
         </p>
         <form
           [formGroup]="loginForm"
@@ -120,11 +121,12 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
       </div>
       <!-- The Other Side -->
       <div class="hidden md:block md:w-2/3  bg-black items-center">
-        <h1
-          class="text-center text-white text-5xl font-bold mt-40 leading-normal"
-        >
-          TVWS security management system for streets
-        </h1>
+        <div class="text-center text-white mt-40 leading-normal">
+          <h1 class="text-4xl font-bold">Security Management System</h1>
+          <h1 class="text-4xl font-semibold">
+            Powered by TV White Space for BroadBand Connectivity
+          </h1>
+        </div>
       </div>
     </section>
   `,

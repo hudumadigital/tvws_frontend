@@ -56,7 +56,7 @@ export class LayoutComponent implements OnInit {
     user = JSON.parse(user);
     if (user) {
       console.log(user);
-      this.username = user.username ? 'Hi, ' + user.username : 'Log in';
+      this.username = user.username ? 'Logged in as: ' + user.username : 'Log in';
     }
     this.authService.userSubject.pipe(takeUntil(this.destroy$)).subscribe({
       next: (res) => {
