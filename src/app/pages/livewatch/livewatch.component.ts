@@ -1,6 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { EzvizCameraService } from 'src/app/services/ezviz-camera.service';
 
 @Component({
   selector: 'app-livewatch',
@@ -9,9 +16,17 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './livewatch.component.html',
   styleUrls: ['./livewatch.component.scss'],
 })
-export class LivewatchComponent {
+export class LivewatchComponent implements OnInit {
+  private cameraService = inject(EzvizCameraService);
   @ViewChild('videoPlayer', { static: false }) videoplayer?: ElementRef;
   isPlaying: boolean = false;
+  liveStreamUrl = '';
+
+  ngOnInit(): void {
+    this.cameraService
+      .getLiveStreamUrl()
+      .subscribe((liveStreamUrl) => (this.liveStreamUrl = liveStreamUrl));
+  }
 
   toggleVideo(event: any) {
     this.videoplayer?.nativeElement.play();

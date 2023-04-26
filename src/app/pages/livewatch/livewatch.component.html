@@ -6,7 +6,8 @@
       <video class="w-screen" #videoPlayer id="my_video_1">
         <source
           class="w-30 h-30"
-          src="https://www.w3schools.com/html/mov_bbb.mp4"
+          [src]="liveStreamUrl"
+          alt="Live Feed Unavailable, Please refresh"
           type="video/mp4"
         />
       </video>
