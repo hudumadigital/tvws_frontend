@@ -11,11 +11,14 @@ import { EzvizCameraService } from 'src/app/services/ezviz-camera.service';
 })
 export class AlarmsComponent implements OnInit {
   private cameraService = inject(EzvizCameraService);
-  alarms: Array<string> = [];
+  alarms: Array<any> = [];
   constructor() {}
   ngOnInit(): void {
-    this.cameraService.getAlarmsList().subscribe((data: Array<string>) => {
+    this.cameraService.getAlarmsList().subscribe((data: Array<any>) => {
       this.alarms = data;
     });
+  }
+  convertDate(date: Date): Date{
+    return new Date(date);
   }
 }

@@ -26,7 +26,7 @@
 
     <tbody class="divide-y divide-gray-100">
       <tr
-        *ngFor="let alarms of alarms; let i = index"
+        *ngFor="let alarm of alarms; let i = index"
         [ngClass]="{ 'bg-gray-50': 0 !== i % 2 }"
         class="hover:bg-gray-100"
       >
@@ -34,13 +34,15 @@
           <div class="text-sm text-gray-900">{{ i + 1 }}</div>
         </td>
         <td class="py-2 px-3 whitespace-nowrap">
-          <div class="text-sm text-gray-900">{{ "alarms.alarmType" }}</div>
+          <div class="text-sm text-gray-900">{{ "Motion Detectiom Alarm" }}</div>
         </td>
         <td class="py-2 px-3 whitespace-nowrap">
-          <div class="text-sm text-gray-900">{{ "alarms.time" }}</div>
+          <div class="text-sm text-gray-900">{{ convertDate(alarm.alarmTime) }}</div>
         </td>
         <td class="py-2 px-3 whitespace-nowrap">
-          <div class="text-sm text-gray-900">{{ "alarms.pictureView" }}</div>
+          <div class="text-sm text-gray-900">
+            <img [src]="alarm.alarmPicUrl">
+          </div>
         </td>
         <td class="py-2 px-3 whitespace-nowrap"></td>
       </tr>
