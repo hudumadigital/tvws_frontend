@@ -17,6 +17,7 @@ export interface AuthResponse {
   isLoggedIn: boolean;
   expiresIn: number;
   username: string;
+  admin?: boolean;
 }
 
 @Injectable({
@@ -40,12 +41,13 @@ export class AuthenticationService {
         // tap is used to perform side effects without changing the value
         tap(
           (result) => {
-            console.log(result)
+            console.log(result);
             if (result.isLoggedIn) {
               const user = {
                 token: result.token,
                 username: result.username,
                 email: result.email,
+                admin: result?.admin,
               };
               this.userSubject.next(user);
               localStorage.setItem(this.userStorageKey, JSON.stringify(user));
