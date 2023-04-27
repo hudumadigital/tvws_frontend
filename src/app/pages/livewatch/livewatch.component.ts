@@ -21,6 +21,7 @@ export class LivewatchComponent implements OnInit {
   @ViewChild('videoPlayer', { static: false }) videoplayer?: ElementRef;
   isPlaying: boolean = false;
   liveStreamUrl = '';
+  liveBroadcast = 'https://vtmld.ezvizlife.com:8883/v3/openlive/K57418162_1_1.m3u8?expire=1744796887&id=571754466663559168&c=fe7cb52e5b&t=e7d65d1b2e1513c5f1420fe7c06f48d0496930d01e890b86af5ebde7c03f2a37&ev=100&u=fa27ea13ed094e3fad133e4ac30c3db6'
 
   ngOnInit(): void {
     this.cameraService
