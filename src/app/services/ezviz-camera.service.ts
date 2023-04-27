@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable, map, of, tap } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -27,7 +27,10 @@ export class EzvizCameraService {
     body.append('appSecret', APP_SECRET);
 
     return this.http
-      .post<{ data: {accessToken: string} }>(this.url + '/lapp/token/get', body)
+      .post<{ data: { accessToken: string } }>(
+        this.url + '/lapp/token/get',
+        body
+      )
       .pipe(
         tap((response: any) => {
           this.accessToken = response?.data?.accessToken;
