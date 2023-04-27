@@ -17,7 +17,7 @@ export class EzvizCameraService {
 
   constructor(private http: HttpClient) {}
 
-  getAccessToken(): Observable<any> {
+  getAccessToken(): Observable<string> {
     if (this.accessToken) {
       return of(this.accessToken);
     }
@@ -27,11 +27,14 @@ export class EzvizCameraService {
     body.append('appSecret', APP_SECRET);
 
     return this.http
-      .post<{ data: {accessToken: string} }>(this.url + '/lapp/token/get', body)
+      .post<{ data: { accessToken: string } }>(
+        this.url + '/lapp/token/get',
+        body
+      )
       .pipe(
         tap((response: any) => {
           this.accessToken = response?.data?.accessToken;
-          console.log(this.accessToken);
+          // console.log(this.accessToken);
         }),
         map((response) => response?.data?.accessToken)
       );
@@ -54,6 +57,20 @@ export class EzvizCameraService {
       ),
       map((response: any) => response?.data?.url),
       tap((response) => {
+        console.log(response);
+      })
+    );
+  }
+  getAlarmsList(): Observable<any> {
+    return this.getAccessToken().pipe(
+      switchMap((accessToken) =>
+        this.http.post(
+          `${this.url}/lapp/alarm/list?deviceSerial=${DEVICE_SERIAL_NUMBER}&accessToken=${accessToken}&channelNo=${CHANNEL_NO}`,
+          {}
+        )
+      ),
+      map((response: any) => response?.data),
+      tap((response: any) => {
         console.log(response);
       })
     );
