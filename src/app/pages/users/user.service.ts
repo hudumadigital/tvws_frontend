@@ -20,13 +20,15 @@ export interface User {
 })
 export class UserService {
   private http = inject(HttpClient);
-  private baseUrl = environment.backendUrl + '/account/users';
-
-  constructor() {}
+  private baseUrl = environment.backendUrl + '/account';
 
   getUsers() {
     return this.http
-      .get<{ message: string; users: User[] }>(this.baseUrl)
+      .get<{ message: string; users: User[] }>(this.baseUrl + '/users')
       .pipe(map((res) => res.users));
+  }
+
+  deleteUser(email: User['email']) {
+    return this.http.delete(this.baseUrl + '/delete/' + email);
   }
 }

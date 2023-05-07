@@ -1,5 +1,5 @@
 <section>
-  <h1 class="font-medium text-lg">User Management</h1>
+  <h1 class="font-medium text-xl uppercase mb-4">User Management</h1>
 
   <ng-container *ngIf="users$ | async as users; else Loading">
     <div class="bg-white rounded-xl p-4">
@@ -8,37 +8,37 @@
           <thead class="bg-gray-100 border-b-2 border-gray-200">
             <tr>
               <th
-                class="p-3 font-semibold uppercase text-sm tracking-wide text-left w-16"
+                class="p-3 font-medium uppercase text-sm tracking-wide text-left w-16"
               >
                 S/N
               </th>
               <th
-                class="p-3 font-semibold uppercase text-sm tracking-wide text-left"
+                class="p-3 font-medium uppercase text-sm tracking-wide text-left"
               >
                 Username
               </th>
               <th
-                class="p-3 font-semibold uppercase text-sm tracking-wide text-left"
+                class="p-3 font-medium uppercase text-sm tracking-wide text-left"
               >
                 Name
               </th>
               <th
-                class="p-3 font-semibold uppercase text-sm tracking-wide text-left"
+                class="p-3 font-medium uppercase text-sm tracking-wide text-left"
               >
                 Email
               </th>
               <th
-                class="p-3 font-semibold uppercase text-sm tracking-wide text-left"
+                class="p-3 font-medium uppercase text-sm tracking-wide text-left"
               >
                 Phone
               </th>
               <th
-                class="p-3 font-semibold uppercase text-sm tracking-wide text-left"
+                class="p-3 font-medium uppercase text-sm tracking-wide text-left"
               >
                 Type
               </th>
               <th
-                class="p-3 font-semibold uppercase text-sm tracking-wide text-left w-24"
+                class="p-3 font-medium uppercase text-sm tracking-wide text-left w-24"
               >
                 <span class="sr-only">Actions</span>
               </th>
@@ -83,7 +83,16 @@
                   {{ user.admin ? "Admin" : "User" }}
                 </span>
               </td>
-              <td class="py-2 px-3 whitespace-nowrap"></td>
+              <td class="py-2 px-3 whitespace-nowrap">
+                <button
+                  color="warn"
+                  mat-icon-button
+                  aria-label="delete"
+                  (click)="onDeleteUser(user.email)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
