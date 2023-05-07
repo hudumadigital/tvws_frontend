@@ -1,5 +1,5 @@
-<div class="overflow-auto">
-  <table class="w-full">
+<div class="overflow-auto bg-white rounded-xl p-4">
+  <table class="w-full" *ngIf="alarms.length > 2; else Loading">
     <thead class="bg-gray-100 border-b-2 border-gray-200">
       <tr>
         <th
@@ -17,9 +17,9 @@
           Picture View
         </th>
         <th
-          class="p-3 font-semibold uppercase text-sm tracking-wide text-left w-24"
+          class="p-3 font-semibold uppercase text-sm tracking-wide text-right"
         >
-          <span class="sr-only">Actions</span>
+          Actions
         </th>
       </tr>
     </thead>
@@ -28,7 +28,7 @@
       <tr
         *ngFor="let alarm of alarms; let i = index"
         [ngClass]="{ 'bg-gray-50': 0 !== i % 2 }"
-        class="hover:bg-gray-100"
+        class="hover:bg-gray-100 w-full"
       >
         <td class="py-2 px-3 whitespace-nowrap">
           <div class="text-sm text-gray-900">{{ i + 1 }}</div>
@@ -40,15 +40,42 @@
         </td>
         <td class="py-2 px-3 whitespace-nowrap">
           <!-- <div class="text-sm text-gray-900">{{ convertDate(alarm.alarmTime) }}</div> -->
-          <div class="text-sm text-gray-900">{{ alarm.alarmTime | date }}</div>
+          <div class="text-sm text-gray-900">
+            {{ alarm.alarmTime | date : "shortTime" }}
+          </div>
         </td>
         <td class="py-2 px-3 whitespace-nowrap">
           <div class="text-sm text-gray-900">
-            <img [src]="alarm.alarmPicUrl" />
+            <img [src]="alarm.alarmPicUrl" class="h-36 w-56" />
           </div>
         </td>
-        <td class="py-2 px-3 whitespace-nowrap"></td>
+        <td class="py-2 px-3 whitespace-nowrap">
+          <button
+            color="warn"
+            mat-icon-button
+            aria-label="delete"
+            (click)="onDeleteEvent()"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+        <td class="py-2 px-3 whitespace-nowrap">
+          <button
+            color="info"
+            mat-icon-button
+            aria-label="report"
+            (click)="reportThisEvent()"
+          >
+            <mat-icon>report</mat-icon>
+          </button>
+        </td>
+        <!-- <td class="py-2 px-3 whitespace-nowrap"></td> -->
       </tr>
     </tbody>
   </table>
+  <ng-template #Loading>
+    <div class="h-40 flex bg-white rounded-xl justify-center items-center">
+      <mat-spinner [diameter]="60"></mat-spinner>
+    </div>
+  </ng-template>
 </div>
