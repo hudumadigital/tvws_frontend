@@ -34,14 +34,17 @@
           <div class="text-sm text-gray-900">{{ i + 1 }}</div>
         </td>
         <td class="py-2 px-3 whitespace-nowrap">
-          <div class="text-sm text-gray-900">{{ "Motion Detectiom Alarm" }}</div>
+          <div class="text-sm text-gray-900">
+            {{ "Motion Detectiom Alarm" }}
+          </div>
         </td>
         <td class="py-2 px-3 whitespace-nowrap">
-          <div class="text-sm text-gray-900">{{ convertDate(alarm.alarmTime) }}</div>
+          <!-- <div class="text-sm text-gray-900">{{ convertDate(alarm.alarmTime) }}</div> -->
+          <div class="text-sm text-gray-900">{{ alarm.alarmTime | date }}</div>
         </td>
         <td class="py-2 px-3 whitespace-nowrap">
           <div class="text-sm text-gray-900">
-            <img [src]="alarm.alarmPicUrl">
+            <img [src]="alarm.alarmPicUrl" />
           </div>
         </td>
         <td class="py-2 px-3 whitespace-nowrap"></td>

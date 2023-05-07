@@ -39,6 +39,10 @@ export const AppRoutes: Routes = [
         path: 'incidents',
         component: IncidentsComponent,
       },
+      {
+        path: 'users',
+        loadComponent: () => import('./pages/users/users.component'),
+      }
     ],
   },
 ];
