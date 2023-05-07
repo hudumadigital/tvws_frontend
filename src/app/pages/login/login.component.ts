@@ -40,7 +40,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
         </h3>
         <p class="max-w-sm text-gray-400 ml-12 mt-6">
           Not registered? <br />
-          Please contact your System Admin
+          Please contact system admin
           <!-- <a
             class="p-2 px-4 pt-2 text-white bg-black rounded-full baseline hover:bg-blend-darken hover:cursor-pointer"
           >
