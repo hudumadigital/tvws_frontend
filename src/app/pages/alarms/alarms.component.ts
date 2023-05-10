@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { EzvizCameraService } from 'src/app/services/ezviz-camera.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { EzvizCameraService } from 'src/app/services/ezviz-camera.service';
 
 @Component({
   selector: 'app-alarms',
@@ -12,9 +12,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   styleUrls: ['./alarms.component.scss'],
 })
 export class AlarmsComponent implements OnInit {
-reportThisEvent() {
-throw new Error('Method not implemented.');
-}
+  reportThisEvent() {
+    throw new Error('Method not implemented.');
+  }
   onDeleteEvent() {
     throw new Error('Method not implemented.');
   }

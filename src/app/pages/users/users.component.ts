@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { UserFormComponent } from './user-form/user-form.component';
 import { User, UserService } from './user.service';
 
 @Component({
@@ -19,6 +21,7 @@ import { User, UserService } from './user.service';
 })
 export default class UsersComponent {
   private userService = inject(UserService);
+  private dialog = inject(MatDialog);
 
   users$ = this.userService.getUsers();
 
@@ -29,5 +32,11 @@ export default class UsersComponent {
       .subscribe({
         next: () => (this.users$ = this.userService.getUsers()),
       });
+  }
+
+  openUserForm(user?: User) {
+    this.dialog.open(UserFormComponent, {
+      data: user,
+    });
   }
 }
