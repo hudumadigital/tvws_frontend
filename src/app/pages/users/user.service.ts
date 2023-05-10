@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { UserPayload } from './user-form/user-form.component';
 
 export interface User {
   readonly _id: string;
@@ -26,6 +27,10 @@ export class UserService {
     return this.http
       .get<{ message: string; users: User[] }>(this.baseUrl + '/users')
       .pipe(map((res) => res.users));
+  }
+
+  createUser(user: UserPayload) {
+    return this.http.post(this.baseUrl + '/register', user);
   }
 
   deleteUser(email: User['email']) {

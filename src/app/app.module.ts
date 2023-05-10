@@ -2,6 +2,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,6 +25,7 @@ import { AppRoutes } from './app.routes';
     BrowserAnimationsModule,
     MatSnackBarModule,
     MatIconModule,
+    MatDialogModule,
     ToastrModule.forRoot({
       closeButton: true,
       progressBar: true,

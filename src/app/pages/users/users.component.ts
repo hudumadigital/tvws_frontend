@@ -37,6 +37,8 @@ export default class UsersComponent {
   openUserForm(user?: User) {
     this.dialog.open(UserFormComponent, {
       data: user,
+      disableClose: true,
+      width: '500px',
     });
   }
 }

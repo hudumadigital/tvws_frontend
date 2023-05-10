@@ -1,1 +1,63 @@
-<p>user-form works!</p>
+<h1 class="font-medium text-xl" mat-dialog-title>Create User</h1>
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmitForm()">
+  <div mat-dialog-content class="grid">
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input
+        matInput
+        placeholder="Enter user first name"
+        formControlName="firstname"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input
+        matInput
+        placeholder="Enter user last name"
+        formControlName="lastname"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        placeholder="Enter user email"
+        formControlName="email"
+        type="email"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Phone</mat-label>
+      <input
+        matInput
+        placeholder="Enter user phone"
+        formControlName="mobile"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        placeholder="Enter username"
+        formControlName="username"
+        required
+      />
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions align="end">
+    <button mat-raised-button color="primary">
+      <mat-icon>save</mat-icon>
+      <span>Save</span>
+    </button>
+  </div>
+</form>
