@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UserFormComponent } from './user-form/user-form.component';
 import { User, UserService } from './user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-users',
@@ -22,6 +23,7 @@ import { User, UserService } from './user.service';
 export default class UsersComponent {
   private userService = inject(UserService);
   private dialog = inject(MatDialog);
+  private toastr = inject(ToastrService);
 
   users$ = this.userService.getUsers();
 
@@ -30,7 +32,10 @@ export default class UsersComponent {
       .deleteUser(email)
       .pipe()
       .subscribe({
-        next: () => (this.users$ = this.userService.getUsers()),
+        next: (res: any) => {
+          this.users$ = this.userService.getUsers();
+          this.toastr.success(res.message);
+        },
       });
   }
 

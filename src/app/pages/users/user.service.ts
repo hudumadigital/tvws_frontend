@@ -12,6 +12,7 @@ export interface User {
   username: string;
   mobile: string;
   admin: boolean;
+  password: string;
   createdAt: string;
   updatedAt: string;
 }
