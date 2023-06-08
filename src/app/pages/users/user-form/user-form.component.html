@@ -2,6 +2,11 @@
 
 <form [formGroup]="userForm" (ngSubmit)="onSubmitForm()">
   <div mat-dialog-content class="grid">
+    <div align="end" class="mb-3">
+      <button mat-raised-button [matDialogClose]="false" color="primary">
+        <mat-icon>cancel</mat-icon> Cancel
+      </button>
+    </div>
     <mat-form-field>
       <mat-label>First Name</mat-label>
       <input
@@ -67,16 +72,15 @@
       />
     </mat-form-field>
   </div>
-
   <div mat-dialog-actions align="end">
     <button mat-raised-button color="primary">
       <mat-spinner
-              *ngIf="loadingState"
-              [diameter]="15"
-              [strokeWidth]="2"
-            ></mat-spinner>
-            <mat-icon *ngIf="!loadingState">save</mat-icon>
-            {{ loadingState ? 'Loading...' : 'Save' }}
+        *ngIf="loadingState"
+        [diameter]="15"
+        [strokeWidth]="2"
+      ></mat-spinner>
+      <mat-icon *ngIf="!loadingState">save</mat-icon>
+      {{ loadingState ? "Loading..." : "Save" }}
     </button>
   </div>
 </form>
