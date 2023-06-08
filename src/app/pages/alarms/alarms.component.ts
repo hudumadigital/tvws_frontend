@@ -22,6 +22,12 @@ export class AlarmsComponent implements OnInit {
   alarms: Array<any> = [];
   constructor() {}
   ngOnInit(): void {
+    this.getAlarmsRepeat();
+    setInterval(() => {
+      this.getAlarmsRepeat();
+    }, 5000);
+  }
+  getAlarmsRepeat(): void {
     this.cameraService.getAlarmsList().subscribe((data: Array<any>) => {
       this.alarms = data;
     });

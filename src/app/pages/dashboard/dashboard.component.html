@@ -7,7 +7,21 @@
       >
         <mat-card-header>
           <mat-card-title class="text-2xl font-bold">
-            New Suspicious Events
+            Suspicious events
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="">
+          <h3 class="mb-0 font-semibold text-4xl">{{ alarms.length }}</h3>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card
+        class="absolute top-4 left-4 right-4 bottom-4 flex flex-col justify-center items-center gap-2 text-center pb-0"
+      >
+        <mat-card-header>
+          <mat-card-title class="text-2xl font-bold">
+            Reported suspicious events
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="">
@@ -21,7 +35,7 @@
       >
         <mat-card-header>
           <mat-card-title class="text-2xl font-bold">
-            Resolved Crimes
+            Reported crimes
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="">
