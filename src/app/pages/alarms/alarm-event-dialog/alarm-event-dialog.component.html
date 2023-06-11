@@ -1,0 +1,28 @@
+<form (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <img [src]="data.alarmPicUrl" />
+
+    <div>Type: {{ data.alarmType }}</div>
+
+    <div>Time: {{ data.alarmTime | date : "shortTime" }}</div>
+
+    <div>Date: {{ data.alarmTime | date : "shortDate" }}</div>
+
+    <mat-form-field class="w-full">
+      <mat-label>Report</mat-label>
+      <textarea
+        matInput
+        [(ngModel)]="alarmDescription"
+        name="report"
+        required
+      ></textarea>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-stroked-button type="button" color="warn" mat-dialog-close>
+      Cancel
+    </button>
+    <button mat-raised-button color="primary" type="submit">Report</button>
+  </mat-dialog-actions>
+</form>

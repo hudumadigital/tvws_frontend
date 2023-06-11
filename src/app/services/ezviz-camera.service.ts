@@ -3,6 +3,24 @@ import { Injectable } from '@angular/core';
 import { Observable, map, of, tap } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
+export interface Alarm {
+  alarmId: string;
+  alarmName: string;
+  alarmPicUrl: string;
+  alarmTime: number;
+  alarmType: number;
+  channelNo: number;
+  customerInfo: string | null;
+  customerType: string | null;
+  delayTime: number;
+  deviceSerial: string;
+  isChecked: boolean;
+  isEncrypt: boolean;
+  preTime: number;
+  recState: number;
+  relationAlarms: Array<any>;
+}
+
 const DEVICE_SERIAL_NUMBER = 'K57418162';
 const APP_KEY = 'b40cffefa020417aacc3e2141f6c6dcf';
 const APP_SECRET = '41701333c33348648631020da16c6418';
