@@ -19,17 +19,22 @@ export class AlarmsComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
   private cameraService = inject(EzvizCameraService);
-  alarms: Array<any> = [];
+  alarms: Array<any> = new Array<any>();
   constructor() {}
   ngOnInit(): void {
     this.getAlarmsRepeat();
-    setInterval(() => {
-      this.getAlarmsRepeat();
-    }, 5000);
+    // setInterval(() => {
+    //   this.getAlarmsRepeat();
+    // }, 5000);
   }
   getAlarmsRepeat(): void {
-    this.cameraService.getAlarmsList().subscribe((data: Array<any>) => {
-      this.alarms = data;
+    this.cameraService.getAlarmsList().subscribe({
+      next: (data: Array<any>) => {
+        this.alarms = data;
+      },
+      error: (error) => {
+        console.log(error);
+      },
     });
   }
   convertDate(date: Date): Date {
