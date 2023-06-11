@@ -7,6 +7,7 @@ const DEVICE_SERIAL_NUMBER = 'K57418162';
 const APP_KEY = 'd76bfaa3a7a9422dbfc69e304175615c';
 const APP_SECRET = 'f8d070b03a8d42199262fa4c530ad0aa';
 const CHANNEL_NO = 1;
+const pageSize = 50;
 
 @Injectable({
   providedIn: 'root',
@@ -65,7 +66,7 @@ export class EzvizCameraService {
     return this.getAccessToken().pipe(
       switchMap((accessToken) =>
         this.http.post(
-          `${this.url}/lapp/alarm/list?deviceSerial=${DEVICE_SERIAL_NUMBER}&accessToken=${accessToken}&channelNo=${CHANNEL_NO}`,
+          `${this.url}/lapp/alarm/list?deviceSerial=${DEVICE_SERIAL_NUMBER}&accessToken=${accessToken}&channelNo=${CHANNEL_NO}&pageSize=${pageSize}`,
           {}
         )
       ),

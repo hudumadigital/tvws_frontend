@@ -2,11 +2,16 @@
 
 <form [formGroup]="userForm" (ngSubmit)="onSubmitForm()">
   <div mat-dialog-content class="grid">
+    <div align="end" class="mb-3">
+      <button mat-raised-button [matDialogClose]="false" color="primary">
+        <mat-icon>cancel</mat-icon> Cancel
+      </button>
+    </div>
     <mat-form-field>
       <mat-label>First Name</mat-label>
       <input
         matInput
-        placeholder="Enter user first name"
+        placeholder="Enter first name"
         formControlName="firstname"
         required
       />
@@ -16,29 +21,8 @@
       <mat-label>Last Name</mat-label>
       <input
         matInput
-        placeholder="Enter user last name"
+        placeholder="Enter last name"
         formControlName="lastname"
-        required
-      />
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Email</mat-label>
-      <input
-        matInput
-        placeholder="Enter user email"
-        formControlName="email"
-        type="email"
-        required
-      />
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Phone</mat-label>
-      <input
-        matInput
-        placeholder="Enter user phone"
-        formControlName="mobile"
         required
       />
     </mat-form-field>
@@ -52,12 +36,51 @@
         required
       />
     </mat-form-field>
-  </div>
 
+    <mat-form-field>
+      <mat-label>Phone</mat-label>
+      <input
+        matInput
+        placeholder="Enter user phone"
+        formControlName="mobile"
+        required
+      />
+    </mat-form-field>
+    <p class="text-gray-400 ml-12 m-3">
+      Both email and password will be used for authentication of users during
+      login
+    </p>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        placeholder="Enter user email"
+        formControlName="email"
+        type="email"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        type="password"
+        matInput
+        placeholder="Enter password"
+        formControlName="password"
+        required
+      />
+    </mat-form-field>
+  </div>
   <div mat-dialog-actions align="end">
     <button mat-raised-button color="primary">
-      <mat-icon>save</mat-icon>
-      <span>Save</span>
+      <mat-spinner
+        *ngIf="loadingState"
+        [diameter]="15"
+        [strokeWidth]="2"
+      ></mat-spinner>
+      <mat-icon *ngIf="!loadingState">save</mat-icon>
+      {{ loadingState ? "Loading..." : "Save" }}
     </button>
   </div>
 </form>
