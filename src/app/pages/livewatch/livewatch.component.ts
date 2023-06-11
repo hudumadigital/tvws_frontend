@@ -21,7 +21,8 @@ export class LivewatchComponent implements OnInit {
   @ViewChild('videoPlayer', { static: false }) videoplayer?: ElementRef;
   isPlaying: boolean = false;
   liveStreamUrl = '';
-  liveBroadcast =
+  liveBroadcast = 'https://ieuopen.ezvizlife.com/v3/openlive/K57418162_1_1.m3u8?expire=1748714689&id=588186918198886400&c=6c5025370a&t=14565c7746d05ebfc29dfdbdaa3df4a4371d27449e090b7f8c4af5e532b941d8&ev=100';
+  liveBroadcast3 =
     'https://vtmld.ezvizlife.com:8883/v3/openlive/K57418162_1_1.m3u8?expire=1744796887&id=571754466663559168&c=fe7cb52e5b&t=e7d65d1b2e1513c5f1420fe7c06f48d0496930d01e890b86af5ebde7c03f2a37&ev=100&u=fa27ea13ed094e3fad133e4ac30c3db6';
   liveBroadcast2 =
     'https://ieuopen.ezviz.com/console/h5videoPlayer.html?videoUrl=https%3A%2F%2Fieuopen.ezvizlife.com%2Fv3%2Fopenlive%2FK57418162_1_1.m3u8%3Fexpire%3D1744806973%26id%3D571796768194695168%26c%3Dfe7cb52e5b%26t%3Daa8e282a2fd222252daafb8662dd23e5dda1ba33dd343926f144de8e6246d03c%26ev%3D100&title=undefined&intro=undefined&coverImg=undefined';

@@ -4,8 +4,8 @@ import { Observable, map, of, tap } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 const DEVICE_SERIAL_NUMBER = 'K57418162';
-const APP_KEY = 'd76bfaa3a7a9422dbfc69e304175615c';
-const APP_SECRET = 'f8d070b03a8d42199262fa4c530ad0aa';
+const APP_KEY = 'b40cffefa020417aacc3e2141f6c6dcf';
+const APP_SECRET = '41701333c33348648631020da16c6418';
 const CHANNEL_NO = 1;
 const pageSize = 50;
 

@@ -1,6 +1,6 @@
 <div class="overflow-auto bg-white rounded-xl p-4">
   <!-- *ngIf="alarms.length > 1; else Loading" -->
-  <table class="w-full">
+  <table class="w-full" *ngIf="alarms.length > 1; else Loading">
     <thead class="bg-black border-b-2 border-gray-200 text-white">
       <tr>
         <th
