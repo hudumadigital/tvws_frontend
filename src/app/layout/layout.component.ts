@@ -4,7 +4,7 @@ import {
   LayoutModule,
 } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, computed, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -49,6 +49,10 @@ export class LayoutComponent implements OnInit {
   private authService = inject(AuthenticationService);
   private destroy$ = new Subject<boolean>();
   username = '';
+  authUser = this.authService.authUser();
+  isAdmin = computed(() => {
+    return this.authUser ? this.authUser.admin : false;
+  });
 
   constructor(private breakpointObserver: BreakpointObserver) {}
   ngOnInit(): void {
@@ -56,7 +60,9 @@ export class LayoutComponent implements OnInit {
     user = JSON.parse(user);
     if (user) {
       // console.log(user);
-      this.username = user.username ? 'Logged in as: ' + user.username : 'Log in';
+      this.username = user.username
+        ? 'Logged in as: ' + user.username
+        : 'Log in';
     }
     this.authService.userSubject.pipe(takeUntil(this.destroy$)).subscribe({
       next: (res) => {
@@ -70,5 +76,5 @@ export class LayoutComponent implements OnInit {
   }
   logout() {
     this.authService.logout();
-    }
+  }
 }

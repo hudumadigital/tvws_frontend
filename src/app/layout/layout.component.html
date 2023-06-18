@@ -47,7 +47,12 @@
           Reports
         </span>
       </a>
-      <a mat-list-item routerLink="/users" routerLinkActive="bg-gray-200">
+      <a
+        mat-list-item
+        routerLink="/users"
+        routerLinkActive="bg-gray-200"
+        *ngIf="isAdmin()"
+      >
         <mat-icon matListItemIcon class="mr-1 text-gray-800"> people </mat-icon>
         <span matListItemLine class="font-normal text-base text-gray-800">
           Users

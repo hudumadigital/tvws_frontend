@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -31,6 +31,15 @@ export class AuthenticationService {
   userSubject = new BehaviorSubject<any>(null);
   userStorageKey = 'user';
 
+  storedUser = localStorage.getItem(this.userStorageKey);
+
+  authUser = signal<{
+    token: string;
+    username: string;
+    email: string;
+    admin?: boolean;
+  } | null>(this.storedUser ? JSON.parse(this.storedUser) : null);
+
   login(authInfo: Auth) {
     return this.http
       .post<AuthResponse>(this.url + '/login', {
@@ -47,10 +56,11 @@ export class AuthenticationService {
                 token: result.token,
                 username: result.username,
                 email: result.email,
-                admin: result?.admin,
+                admin: result.admin,
               };
               this.userSubject.next(user);
               localStorage.setItem(this.userStorageKey, JSON.stringify(user));
+              this.authUser.set(user);
             }
           },
           (error) => {
@@ -60,8 +70,10 @@ export class AuthenticationService {
         )
       );
   }
+
   logout() {
     if (localStorage.getItem('user')) localStorage.removeItem('user');
+    this.authUser.set(null);
     this.router.navigateByUrl('/');
   }
 }
