@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, map, of, tap } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 export interface Alarm {
   alarmId: string;
@@ -19,6 +20,7 @@ export interface Alarm {
   preTime: number;
   recState: number;
   relationAlarms: Array<any>;
+  description?: string;
 }
 
 const DEVICE_SERIAL_NUMBER = 'K57418162';
@@ -26,15 +28,17 @@ const APP_KEY = 'b40cffefa020417aacc3e2141f6c6dcf';
 const APP_SECRET = '41701333c33348648631020da16c6418';
 const CHANNEL_NO = 1;
 const pageSize = 50;
-
+export interface Event {}
 @Injectable({
   providedIn: 'root',
 })
 export class EzvizCameraService {
+  private http = inject(HttpClient);
   private accessToken = '';
   private url = ' https://ieuopen.ezvizlife.com/api';
+  private backendUrl = `${environment.backendUrl}`;
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   getAccessToken(): Observable<string> {
     if (this.accessToken) {
@@ -91,6 +95,15 @@ export class EzvizCameraService {
       map((response: any) => response?.data),
       tap((response: any) => {
         console.log(response);
+      })
+    );
+  }
+  submitReportedEvent(event: Alarm): Observable<any> {
+    // const modifiedPicUrl = event.alarmPicUrl.split('?')[1];
+    // console.log(modifiedPicUrl);
+    return this.http.post(this.backendUrl + '/report-event', event).pipe(
+      tap((result) => {
+        console.log(result);
       })
     );
   }

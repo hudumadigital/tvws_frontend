@@ -5,7 +5,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Alarm } from 'src/app/services/ezviz-camera.service';
+import {
+  Alarm,
+  EzvizCameraService,
+} from 'src/app/services/ezviz-camera.service';
 
 @Component({
   selector: 'app-alarm-event-dialog',
@@ -22,11 +25,14 @@ import { Alarm } from 'src/app/services/ezviz-camera.service';
   styleUrls: ['./alarm-event-dialog.component.scss'],
 })
 export class AlarmEventDialogComponent {
+  private ezvizCameraService = inject(EzvizCameraService);
   public data = inject<Alarm>(MAT_DIALOG_DATA);
   alarmDescription = '';
 
   onSubmit() {
-    console.log(this.data);
-    console.log(this.alarmDescription);
+    const description = this.alarmDescription;
+    const event = { ...this.data, description };
+    if (!description) return;
+    this.ezvizCameraService.submitReportedEvent(event);
   }
 }
