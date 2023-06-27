@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -11,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
+
 import {
   Alarm,
   EzvizCameraService,
@@ -38,9 +41,11 @@ export class AlarmEventDialogComponent {
   loading = signal(false);
   alarmDescription = '';
 
+  loadingState: boolean = false;
+
   onSubmit() {
     const description = this.alarmDescription;
-    const event = { ...this.data, description };
+    const event: any = { ...this.data, description }!;
     if (!description) return;
     this.loading.set(true);
     this.ezvizCameraService
@@ -59,3 +64,52 @@ export class AlarmEventDialogComponent {
       });
   }
 }
+
+// this.loadingState = true;
+// this.http.get(event.alarmPicUrl, { responseType: 'blob' }).subscribe({
+//   next: (imageBlob: Blob) => {
+//     console.log(imageBlob);
+//     const reader: any = new FileReader();
+//     reader.readAsDataURL(imageBlob);
+
+//     reader.onloadend = () => {
+//       const base64data = reader.result.toString();
+//       const image = new Image();
+//       image.src = base64data;
+//       image.onload = () => {
+//         const canvas: any = document.createElement('canvas');
+//         canvas.width = image.width;
+//         canvas.height = image.height;
+//         const ctx = canvas.getContext('2d');
+//         ctx.drawImage(image, 0, 0);
+//         canvas.toBlob(
+//           (blob: any) => {
+//             console.log(blob);
+//             const modifiedEvent: any = { ...event, blob };
+//             console.log(modifiedEvent);
+//             this.ezvizCameraService
+//               .submitReportedEvent(modifiedEvent)
+//               .pipe(takeUntilDestroyed(this.destroyRef))
+//               .subscribe({
+//                 next: (result: any) => {
+//                   this.loadingState = false;
+//                   this.dialogRef.close();
+//                   this.toastr.success(result.message);
+//                 },
+//                 error: (err) => {
+//                   this.loadingState = false;
+//                   // TODO: handle error
+//                   this.toastr.error(err.error.message, 'Error');
+//                   console.error(err);
+//                 },
+//               });
+//           },
+//           'image/jpeg',
+//           1
+//         );
+//       };
+//     };
+//     // END OF BLOB
+//   },
+//   error: (error) => {},
+// });

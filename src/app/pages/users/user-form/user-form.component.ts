@@ -50,6 +50,7 @@ export class UserFormComponent {
   });
 
   onSubmitForm() {
+    if (this.userForm.invalid) return;
     this.loadingState = true;
     const userPayload: UserPayload = {
       firstname: this.userForm.getRawValue().firstname,
@@ -69,6 +70,7 @@ export class UserFormComponent {
           this.loadingState = false;
           this.dialogRef.close();
           this.toastr.success(result.message);
+          // this.userService.getUsers();
         },
         error: (err) => {
           this.loadingState = false;

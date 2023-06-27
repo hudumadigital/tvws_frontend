@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Observable, map, of, tap } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -37,7 +38,7 @@ export class EzvizCameraService {
   private accessToken = '';
   private url = ' https://ieuopen.ezvizlife.com/api';
   private backendUrl = `${environment.backendUrl}`;
-
+  private toastr = inject(ToastrService);
   constructor() {}
 
   getAccessToken(): Observable<string> {
@@ -99,13 +100,21 @@ export class EzvizCameraService {
     );
   }
   submitReportedEvent(event: Alarm): Observable<any> {
-    console.log(event);
-    // const modifiedPicUrl = event.alarmPicUrl.split('?')[1];
-    // console.log(modifiedPicUrl);
-    return this.http.post(this.backendUrl + '/report-event', event).pipe(
-      tap((result) => {
-        console.log(result);
-      })
-    );
+    return this.http
+      .post(this.backendUrl + '/report-event', event, this.getOptions())
+      .pipe(
+        tap((result) => {
+          // console.log(result);
+        })
+      );
+  }
+  getOptions(): object {
+    const storageData: string = localStorage.getItem('user')!;
+    const { token } = JSON.parse(storageData) ? JSON.parse(storageData) : '';
+    return {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
   }
 }
