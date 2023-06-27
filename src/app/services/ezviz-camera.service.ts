@@ -99,6 +99,7 @@ export class EzvizCameraService {
     );
   }
   submitReportedEvent(event: Alarm): Observable<any> {
+    console.log(event);
     // const modifiedPicUrl = event.alarmPicUrl.split('?')[1];
     // console.log(modifiedPicUrl);
     return this.http.post(this.backendUrl + '/report-event', event).pipe(

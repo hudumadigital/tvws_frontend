@@ -46,6 +46,7 @@ export class AlarmsComponent implements OnInit {
   onReportThisEvent(alarm: Alarm) {
     this.dialog.open(AlarmEventDialogComponent, {
       data: alarm,
+      disableClose: true,
     });
   }
 

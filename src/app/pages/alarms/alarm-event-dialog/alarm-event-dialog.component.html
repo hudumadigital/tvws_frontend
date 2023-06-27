@@ -23,6 +23,13 @@
     <button mat-stroked-button type="button" color="warn" mat-dialog-close>
       Cancel
     </button>
-    <button mat-raised-button color="primary" type="submit">Report</button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="loading()"
+    >
+      {{ loading() ? "Loading..." : "Report" }}
+    </button>
   </mat-dialog-actions>
 </form>
