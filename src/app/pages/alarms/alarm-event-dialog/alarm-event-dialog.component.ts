@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
+import { DateManipulationPipe } from 'src/app/pipes/date-manipulation.pipe';
 
 import {
   Alarm,
@@ -27,6 +28,7 @@ import {
     MatInputModule,
     MatDialogModule,
     MatButtonModule,
+    DateManipulationPipe
   ],
   templateUrl: './alarm-event-dialog.component.html',
   styleUrls: ['./alarm-event-dialog.component.scss'],
