@@ -25,7 +25,10 @@
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="">
-          <h3 class="mb-0 font-semibold text-4xl">0</h3>
+          <!-- <span *ngIf="reports$ | async as reports; else 0"></span> -->
+          <h3 class="mb-0 font-semibold text-4xl">
+            {{ (reports$ | async)?.length }}
+          </h3>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>

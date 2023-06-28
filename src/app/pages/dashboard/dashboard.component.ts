@@ -47,6 +47,8 @@ export default class DashboardComponent implements OnInit {
 
   private cameraService = inject(EzvizCameraService);
   alarms: Array<any> = [];
+  private ezvizService = inject(EzvizCameraService);
+  reports$ = this.ezvizService.getReports();
   constructor(private breakpointObserver: BreakpointObserver) {}
   ngOnInit(): void {
     this.getAlarmsRepeat();
