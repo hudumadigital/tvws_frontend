@@ -8,11 +8,12 @@ import {
   EzvizCameraService,
 } from 'src/app/services/ezviz-camera.service';
 import { AlarmEventDialogComponent } from './alarm-event-dialog/alarm-event-dialog.component';
+import { DateManipulationPipe } from 'src/app/pipes/date-manipulation.pipe';
 
 @Component({
   selector: 'app-alarms',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatProgressSpinnerModule],
+  imports: [CommonModule, MatIconModule, MatProgressSpinnerModule, DateManipulationPipe],
   templateUrl: './alarms.component.html',
   styleUrls: ['./alarms.component.scss'],
 })
