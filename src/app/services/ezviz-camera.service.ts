@@ -117,4 +117,12 @@ export class EzvizCameraService {
       },
     };
   }
+  getReports() {
+    return this.http
+      .get<{ message: string; reports: any }>(
+        this.backendUrl + '/reports',
+        this.getOptions()
+      )
+      .pipe();
+  }
 }
