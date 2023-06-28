@@ -5,6 +5,7 @@ import {
 } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, computed, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -45,6 +46,7 @@ export class LayoutComponent implements OnInit {
       map((result) => result.matches),
       shareReplay()
     );
+  isHandset = toSignal(this.isHandset$, { initialValue: true });
   private toastr = inject(ToastrService);
   private authService = inject(AuthenticationService);
   private destroy$ = new Subject<boolean>();

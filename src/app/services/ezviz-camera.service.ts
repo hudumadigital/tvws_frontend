@@ -123,6 +123,6 @@ export class EzvizCameraService {
         this.backendUrl + '/reports',
         this.getOptions()
       )
-      .pipe();
+      .pipe(map((response) => response.reports));
   }
 }
