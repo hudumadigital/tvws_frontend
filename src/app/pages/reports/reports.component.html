@@ -24,7 +24,7 @@
               title="Reported Event Image"
             ></div>
             <div
-              class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal"
+              class="border-r border-b border-l border-gray-400 w-full lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal"
             >
               <div class="mb-8">
                 <p class="text-sm text-gray-600 flex items-center">
@@ -53,7 +53,8 @@
                     Reported by: {{ report.username }}
                   </p>
                   <p class="text-gray-600">
-                    Reported at: {{ report.updatedAt | dateManipulation | date : "medium" }}
+                    Reported at:
+                    {{ report.updatedAt | dateManipulation | date : "medium" }}
                   </p>
                 </div>
               </div>
