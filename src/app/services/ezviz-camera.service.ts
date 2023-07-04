@@ -25,8 +25,8 @@ export interface Alarm {
 }
 
 const DEVICE_SERIAL_NUMBER = 'K57418162';
-const APP_KEY = 'b40cffefa020417aacc3e2141f6c6dcf';
-const APP_SECRET = '41701333c33348648631020da16c6418';
+const APP_KEY = '43d4719a24d946d585deab06f6589913';
+const APP_SECRET = '7d086bed07a64c02af82886a9e2d65e7';
 const CHANNEL_NO = 1;
 const pageSize = 50;
 export interface Event {}
