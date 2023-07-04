@@ -13,7 +13,12 @@ import { DateManipulationPipe } from 'src/app/pipes/date-manipulation.pipe';
 @Component({
   selector: 'app-alarms',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatProgressSpinnerModule, DateManipulationPipe],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    DateManipulationPipe,
+  ],
   templateUrl: './alarms.component.html',
   styleUrls: ['./alarms.component.scss'],
 })
@@ -24,9 +29,9 @@ export class AlarmsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAlarmsRepeat();
-    // setInterval(() => {
-    //   this.getAlarmsRepeat();
-    // }, 5000);
+    setInterval(() => {
+      this.getAlarmsRepeat();
+    }, 50000);
   }
 
   getAlarmsRepeat(): void {

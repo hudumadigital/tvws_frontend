@@ -52,9 +52,9 @@ export default class DashboardComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver) {}
   ngOnInit(): void {
     this.getAlarmsRepeat();
-    // setInterval(() => {
-    //   this.getAlarmsRepeat();
-    // }, 5000);
+    setInterval(() => {
+      this.getAlarmsRepeat();
+    }, 50000);
   }
   getAlarmsRepeat(): void {
     this.cameraService.getAlarmsList().subscribe({
