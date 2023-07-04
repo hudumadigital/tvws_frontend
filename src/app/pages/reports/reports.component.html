@@ -54,7 +54,11 @@
                   </p>
                   <p class="text-gray-600">
                     Reported at:
-                    {{ report.updatedAt | dateManipulation | date : "medium" }}
+                    {{
+                      report.updatedAt
+                        | dateManipulation
+                        | date : "short" : "+0600"
+                    }}
                   </p>
                 </div>
               </div>

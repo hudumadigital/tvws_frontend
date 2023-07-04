@@ -9,7 +9,12 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-reports',
   standalone: true,
-  imports: [CommonModule, MatProgressSpinnerModule, MatIconModule, DateManipulationPipe],
+  imports: [
+    CommonModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+    DateManipulationPipe,
+  ],
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss'],
 })
@@ -21,6 +26,6 @@ export class ReportsComponent implements OnInit {
   ngOnInit(): void {}
 
   printReport() {
-    throw new Error('Method not implemented.');
+    window.print();
   }
 }
