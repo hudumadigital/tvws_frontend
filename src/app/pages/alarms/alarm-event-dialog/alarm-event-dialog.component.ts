@@ -28,7 +28,7 @@ import {
     MatInputModule,
     MatDialogModule,
     MatButtonModule,
-    DateManipulationPipe
+    DateManipulationPipe,
   ],
   templateUrl: './alarm-event-dialog.component.html',
   styleUrls: ['./alarm-event-dialog.component.scss'],
@@ -57,9 +57,9 @@ export class AlarmEventDialogComponent {
           this.loading.set(false);
           this.toastr.success('Reported event successfully');
         },
-        error: () => {
+        error: (err) => {
           this.loading.set(false);
-          this.toastr.error('Failed to report event, try again later');
+          this.toastr.error(err.error.message, 'Error');
         },
       });
   }
